@@ -2,6 +2,7 @@ package main;
 
 import chat.Message;
 import chat.Node;
+import helpers.File;
 import ui.GUI;
 
 import java.io.IOException;
@@ -9,14 +10,14 @@ import java.util.Random;
 
 public class Middleware implements Sender, Displayer {
     private final Random random = new Random();
-    private Node n;
+    private Node node;
     private GUI ui;
 
-    public void setN(Node n) {
-        this.n = n;
+    public void setNode(Node n) {
+        this.node = n;
     }
 
-    public void setUi(GUI ui) {
+    public void setUI(GUI ui) {
         this.ui = ui;
     }
 
@@ -27,6 +28,11 @@ public class Middleware implements Sender, Displayer {
 
     @Override
     public void sendMessage(String message) throws IOException {
-        n.sendToAllPeers(new Message(random.nextLong(), message));
+        node.sendToAllPeers(new Message(random.nextLong(), message));
+    }
+
+    @Override
+    public void reloadMessages(String fileName) throws IOException {
+        ui.appendToTextArea(File.read(fileName));
     }
 }

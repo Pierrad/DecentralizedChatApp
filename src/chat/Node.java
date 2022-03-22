@@ -139,7 +139,7 @@ public class Node {
         alreadyReceivedMessages.add(msg.id);
         String completeMessage = buildMessage(msg);
         showMessage(completeMessage);
-        File.write("save.txt", completeMessage);
+        File.write("history.txt", completeMessage);
         msg.getRoute().add(PSEUDO);
 
         var json = gson.toJson(msg);
