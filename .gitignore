@@ -31,3 +31,6 @@ out/
 
 # MacOS file
 .DS_Store
+
+# App file
+save.txt

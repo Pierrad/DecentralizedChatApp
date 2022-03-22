@@ -10,6 +10,7 @@ import java.util.*;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import helpers.File;
 import main.Middleware;
 
 public class Node {
@@ -136,7 +137,9 @@ public class Node {
 
     public void sendToAllPeers(Message msg) throws IOException {
         alreadyReceivedMessages.add(msg.id);
-        showMessage(buildMessage(msg));
+        String completeMessage = buildMessage(msg);
+        showMessage(completeMessage);
+        File.write("save.txt", completeMessage);
         msg.getRoute().add(PSEUDO);
 
         var json = gson.toJson(msg);
