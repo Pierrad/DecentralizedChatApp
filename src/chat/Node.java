@@ -22,12 +22,12 @@ public class Node {
     private final Set<Long> alreadyReceivedMessages = new HashSet<>();
     private static final Random random = new Random();
     private static Gson gson;
-    private final int NUMBER_OF_REQUIRED_PEERS = 0;
+    private final int NUMBER_OF_REQUIRED_PEERS = 4;
     private Middleware middleware;
-    // private final String prefix = "192.168.43.";
-    // private final int[] suffixes = new int[] { 56, 137, 36, 28, 54, 129, 167, 34, 79, 164, 75, 4 };
-    private final String prefix = "192.168.1.";
-    private final int[] suffixes = new int[] { 106 };
+    private final String prefix = "192.168.43.";
+    private final int[] suffixes = new int[] { 56, 137, 36, 28, 54, 129, 167, 34, 79, 164, 75, 4 };
+    // private final String prefix = "192.168.1.";
+    // private final int[] suffixes = new int[] { 106 };
 
     private final String PSEUDO = "PA";
 
@@ -152,8 +152,8 @@ public class Node {
     }
 
     public String buildMessage(Message msg) {
-        String sender = msg.getRoute().isEmpty() ? PSEUDO : msg.getRoute().get(msg.getRoute().size() - 1);
-        return "> " + sender + " \n" + msg.getContent() + "\nRoute : " +  msg.getRoute().toString() + "\n";
+        String sender = (msg.getRoute() == null || msg.getRoute().isEmpty()) ? PSEUDO : msg.getRoute().get(msg.getRoute().size() - 1);
+        return "> " + sender + " \n" + msg.getContent() + "\nRoute : " +  (msg.getRoute() == null ? "[]" :  msg.getRoute().toString()) + "\n";
     }
 
     public void showMessage(String message) {
