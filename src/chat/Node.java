@@ -25,8 +25,6 @@ public class Node {
     private final String prefix = "192.168.102.";
     private final int[] suffixes = new int[] { 56, 36, 28, 54, 129, 167, 34, 79, 164, 75, 4 };
     private static final Serializer serializer = new SerializerJSON();
-    // private final String prefix = "192.168.1.";
-    // private final int[] suffixes = new int[] { 106 };
 
     private final String PSEUDO = "PA";
 
@@ -146,8 +144,6 @@ public class Node {
                         } else {
                             System.err.println("Unknown message type: " + msg.getClass().getName());
                         }
-
-                        System.out.println(msg);
                         sendToAllPeers(msg);
                     }
 
@@ -165,7 +161,6 @@ public class Node {
             showMessage(completeMessage);
             File.write("history.txt", completeMessage);
         }
-
         msg.route.add(PSEUDO);
 
         var buf = serializer.serialize(msg);
