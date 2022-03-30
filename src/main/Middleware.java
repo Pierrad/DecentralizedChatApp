@@ -1,15 +1,12 @@
 package main;
 
-import chat.Message;
 import chat.Node;
 import helpers.File;
 import ui.GUI;
 
 import java.io.IOException;
-import java.util.Random;
 
 public class Middleware implements Sender, Displayer {
-    private final Random random = new Random();
     private Node node;
     private GUI ui;
 
@@ -28,7 +25,9 @@ public class Middleware implements Sender, Displayer {
 
     @Override
     public void sendMessage(String message) throws IOException {
-        node.sendToAllPeers(new Message(random.nextLong(), message));
+        Node.TextMessage msg = new Node.TextMessage();
+        msg.content = message;
+        node.sendToAllPeers(msg);
     }
 
     @Override
